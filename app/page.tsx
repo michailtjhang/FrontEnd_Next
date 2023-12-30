@@ -1,13 +1,14 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import { getServerSession } from 'next-auth'
+import { authOptions } from './auth/auth'
+import Lists from './components/list'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions)
   return (
-    <div>
-      <h2>Home Page</h2>
+    <div className='grid justify-center items-center h-[80vh]'>
+      <Lists />
+
+      <pre>{JSON.stringify(session)}</pre>
     </div>
   )
 }
